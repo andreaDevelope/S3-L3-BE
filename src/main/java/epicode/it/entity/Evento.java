@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "eventi")
@@ -22,6 +24,14 @@ public class Evento {
 
     @Column(nullable = false)
     private String descrizione;
+
+    @ManyToOne
+    private Location location;
+
+
+
+    @OneToMany(mappedBy = "evento")
+    private List<Partecipazione> partecipazioni = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "tipo_evento")
